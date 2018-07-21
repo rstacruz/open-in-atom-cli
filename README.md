@@ -1,8 +1,17 @@
 # open-in-atom-cli
 
-> Open a file in Atom
+> Open a file in Atom, fast
 
-See [rstacruz/open-in-atom] for the companion Atom plugin.
+## Installation
+
+Install the bin using npm or yarn:
+
+```sh
+npm install -g open-in-atom-cli
+yarn global add open-in-atom-cli
+```
+
+Then install the companion Atom plugin, [rstacruz/open-in-atom].
 
 [rstacruz/open-in-atom]: https://github.com/rstacruz/open-in-atom
 
@@ -18,5 +27,5 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 [![](https://img.shields.io/github/followers/rstacruz.svg?style=social&label=@rstacruz)](https://github.com/rstacruz) &nbsp;
 [![](https://img.shields.io/twitter/follow/rstacruz.svg?style=social&label=@rstacruz)](https://twitter.com/rstacruz)
 
-[MIT]: http://mit-license.org/
+[mit]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/open-in-atom-cli/contributors
