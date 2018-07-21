@@ -32,7 +32,7 @@ call_rpc () {
     --header "Content-Type: application/json" \
     --request POST \
     --data "$data" \
-    "$API_HOST/do/openFile" >/dev/null
+    "$API_HOST/do/$action" >/dev/null
 }
 
 # Opens files using the `openFile` RPC.
