@@ -34,6 +34,14 @@ atom-open .
 atom-open . README.md package.json
 ```
 
+## Using with other apps
+
+You can set atom-open as your EDITOR for some apps. Here it is working with [ranger] (eg, `EDITOR=atom-open ranger`):
+
+![open-in-atom-ranger](https://user-images.githubusercontent.com/74385/43037857-c60eabe6-8d44-11e8-9254-23c29826b045.gif)
+
+[ranger]: https://github.com/ranger/ranger
+
 ## Thanks
 
 **open-in-atom-cli** © 2018, Rico Sta. Cruz. Released under the [MIT] License.<br>
