@@ -65,3 +65,5 @@ else
   do_open_file "$@" || atom "$@"
   exit $?
 fi
+
+# TODO: discard '--'
