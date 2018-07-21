@@ -11,9 +11,11 @@ npm install -g open-in-atom-cli
 yarn global add open-in-atom-cli
 ```
 
-Then install the companion Atom plugin, [rstacruz/open-in-atom].
+Alternatively, you can just copy the shell script [`bin/atom-open`](bin/atom-open) to your PATH.
 
-[rstacruz/open-in-atom]: https://github.com/rstacruz/open-in-atom
+You'll also need to install the companion Atom plugin, [open-in-atom].
+
+[open-in-atom]: https://github.com/rstacruz/open-in-atom
 
 ## Usage
 
@@ -32,7 +34,7 @@ atom-open . README.md package.json
 
 ## Thanks
 
-**open-in-atom-cli** © 2018+, Rico Sta. Cruz. Released under the [MIT] License.<br>
+**open-in-atom-cli** © 2018, Rico Sta. Cruz. Released under the [MIT] License.<br>
 Authored and maintained by Rico Sta. Cruz with help from contributors ([list][contributors]).
 
 > [ricostacruz.com](http://ricostacruz.com) &nbsp;&middot;&nbsp;
