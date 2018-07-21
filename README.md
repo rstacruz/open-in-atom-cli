@@ -1,6 +1,6 @@
 # open-in-atom-cli
 
-> Open a file in Atom from the CLI with no lags
+> Open a file in Atom from the terminal without lag
 
 ![open-in-atom](https://user-images.githubusercontent.com/74385/43037729-87aeccec-8d43-11e8-8509-b64115de0f91.gif)
 
