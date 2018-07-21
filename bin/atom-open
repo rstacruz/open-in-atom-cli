@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Open files in Atom via the HTTP RPC.
+# If it's not available, it falls back to atom's CLI.
+
+API_HOST="http://127.0.0.1:58220"
+
+do_open () {
+	# Build paths
+	paths=""
+	pwd="$(pwd -LP)"
+	for fn in "$@"; do
+		segment="\"${pwd}/${fn}\""
+		if [ -n "$paths" ]; then
+			paths="${paths},${segment}"
+		else
+			paths="${segment}"
+		fi
+	done
+
+	# Build JSON data
+	data="{\"paths\":[${paths}]}"
+
+	# Send
+	curl \
+		--silent \
+		--header "Content-Type: application/json" \
+	  --request POST \
+	  --data "$data" \
+	  "$API_HOST/do/openFile" >/dev/null
+}
+
+do_open "$@" || xatom "$@"
+exit $?
