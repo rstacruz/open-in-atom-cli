@@ -4,7 +4,8 @@
 
 API_HOST="http://127.0.0.1:58220"
 
-do_open () {
+# Opens files using the openFile RPC.
+do_open_file () {
   # Build paths
   paths=""
   pwd="$(pwd -LP)"
@@ -29,12 +30,22 @@ do_open () {
     "$API_HOST/do/openFile" >/dev/null
 }
 
+# Opens a workspace using the openWorkspace RPC.
+do_open_workspace () {
+  echo "(to be implemented)"
+}
+
+# Run
 if [ -z "$1" ]; then
   # If no args were passed, just open Atom as usual
   atom
   exit $?
+elif [ -d "$1" ]; then
+  # If $1 is a directory, assume we're trying to open a workspace
+  do_open_workspace "$@" || atom "$@"
+  exit $?
 else
   # Try to open the files in Atom
-  do_open "$@" || atom "$@"
+  do_open_file "$@" || atom "$@"
   exit $?
 fi
