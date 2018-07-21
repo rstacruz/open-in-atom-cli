@@ -8,9 +8,15 @@ API_HOST="http://127.0.0.1:58220"
 jsonify_paths () {
   # Build paths
   paths=""
-  pwd="$(pwd -LP)"
   for fn in "$@"; do
-    segment="\"${pwd}/${fn}\""
+    # Handle absolute and relative paths properly
+    if [ "${fn:0:1}" == "/" ]; then
+      filepath="$fn"
+    else
+      filepath="$(pwd -LP)/${fn}"
+    fi
+
+    segment="\"${filepath}\""
     if [ -n "$paths" ]; then
       paths="${paths},${segment}"
     else
@@ -52,18 +58,23 @@ do_open_workspace () {
 }
 
 # Run
+if [ "$1" == '--' ]; then shift; fi
 if [ -z "$1" ]; then
   # If no args were passed, just open Atom as usual
   atom
   exit $?
 elif [ -d "$1" ]; then
   # If $1 is a directory, assume we're trying to open a workspace
-  do_open_workspace "$@" || atom "$@"
+  if do_open_workspace "$1"; then
+    # If there are more files to open, open them regularly
+    shift
+    if [ -n "$1" ]; then do_open_file "$@"; fi
+  else
+    atom "$@"
+  fi
   exit $?
 else
   # Try to open the files in Atom
   do_open_file "$@" || atom "$@"
   exit $?
 fi
-
-# TODO: discard '--'
