@@ -5,29 +5,36 @@
 API_HOST="http://127.0.0.1:58220"
 
 do_open () {
-	# Build paths
-	paths=""
-	pwd="$(pwd -LP)"
-	for fn in "$@"; do
-		segment="\"${pwd}/${fn}\""
-		if [ -n "$paths" ]; then
-			paths="${paths},${segment}"
-		else
-			paths="${segment}"
-		fi
-	done
+  # Build paths
+  paths=""
+  pwd="$(pwd -LP)"
+  for fn in "$@"; do
+    segment="\"${pwd}/${fn}\""
+    if [ -n "$paths" ]; then
+      paths="${paths},${segment}"
+    else
+      paths="${segment}"
+    fi
+  done
 
-	# Build JSON data
-	data="{\"paths\":[${paths}]}"
+  # Build JSON data
+  data="{\"paths\":[${paths}]}"
 
-	# Send
-	curl \
-		--silent \
-		--header "Content-Type: application/json" \
-	  --request POST \
-	  --data "$data" \
-	  "$API_HOST/do/openFile" >/dev/null
+  # Send
+  curl \
+    --silent \
+    --header "Content-Type: application/json" \
+    --request POST \
+    --data "$data" \
+    "$API_HOST/do/openFile" >/dev/null
 }
 
-do_open "$@" || xatom "$@"
-exit $?
+if [ -z "$1" ]; then
+  # If no args were passed, just open Atom as usual
+  atom
+  exit $?
+else
+  # Try to open the files in Atom
+  do_open "$@" || atom "$@"
+  exit $?
+fi

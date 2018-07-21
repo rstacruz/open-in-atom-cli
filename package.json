@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["atom"],
+  "keywords": [
+    "atom"
+  ],
   "bin": {
     "atom-open": "bin/atom-open"
   },
