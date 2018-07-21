@@ -15,6 +15,21 @@ Then install the companion Atom plugin, [rstacruz/open-in-atom].
 
 [rstacruz/open-in-atom]: https://github.com/rstacruz/open-in-atom
 
+## Usage
+
+Use `atom-open` instead of `atom`. It will open your files instantly, instead of waiting 5 seconds for the official Atom CLI.
+
+```sh
+# Open a file
+atom-open README.md
+
+# Open a directory
+atom-open .
+
+# Open a directory and some files under it
+atom-open . README.md package.json
+```
+
 ## Thanks
 
 **open-in-atom-cli** © 2018+, Rico Sta. Cruz. Released under the [MIT] License.<br>
