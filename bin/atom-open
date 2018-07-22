@@ -2,7 +2,25 @@
 # Open files in Atom via the HTTP RPC.
 # If it's not available, it falls back to atom's CLI.
 
-API_HOST="http://127.0.0.1:58220"
+get_cache_dir () {
+  if [ -e "$XDG_CACHE_DIR" ]; then
+    echo "$XDG_CACHE_DIR"
+  elif [ -e "$LOCALAPPDATA" ]; then
+    echo "$LOCALAPPDATA"
+  elif [ -e "$HOME/Library/Caches" ]; then
+    echo "$HOME/Library/Caches"
+  elif [ -e "$HOME/AppData/Local" ]; then
+    echo "$HOME/AppData/Local"
+  else
+    echo "$HOME/.cache"
+  fi
+}
+
+PORTFILE="$(get_cache_dir)/open-in-atom/port"
+
+if [ -f "$PORTFILE" ]; then
+  API_HOST="http://127.0.0.1:$(cat $PORTFILE)"
+fi
 
 # Convert paths into a JSON array.
 jsonify_paths () {
@@ -43,6 +61,7 @@ call_rpc () {
 
 # Opens files using the `openFile` RPC.
 do_open_file () {
+  if [ -z "$API_HOST" ]; then exit 1; fi
   # Build JSON data
   paths="$(jsonify_paths "$@")"
   data="{\"paths\":${paths}}"
@@ -51,6 +70,7 @@ do_open_file () {
 
 # Opens a workspace using the `openWorkspace` RPC.
 do_open_workspace () {
+  if [ -z "$API_HOST" ]; then exit 1; fi
   # Build JSON data
   paths="$(jsonify_paths "$1")"
   data="{\"paths\":${paths}}"
