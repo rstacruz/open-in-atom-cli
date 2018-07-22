@@ -10,7 +10,8 @@
     "atom"
   ],
   "bin": {
-    "atom-open": "bin/atom-open"
+    "atom-open": "bin/atom-open",
+    "open-in-atom": "bin/open-in-atom"
   },
   "author": "",
   "license": "ISC"

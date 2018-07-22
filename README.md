@@ -13,7 +13,7 @@ npm install -g open-in-atom-cli
 yarn global add open-in-atom-cli
 ```
 
-Alternatively, you can just copy the shell script [`bin/atom-open`](bin/atom-open) to your PATH.
+Alternatively, you can just copy the shell script [`bin/open-in-atom`](bin/open-in-atom) to your PATH.
 
 You'll also need to install the companion Atom plugin, [open-in-atom].
 
@@ -21,22 +21,22 @@ You'll also need to install the companion Atom plugin, [open-in-atom].
 
 ## Usage
 
-Use `atom-open` instead of `atom`. It will open your files instantly, instead of waiting 5 seconds for the official Atom CLI.
+Use `open-in-atom` instead of `atom`. It will open your files instantly, instead of waiting 5 seconds for the official Atom CLI.
 
 ```sh
 # Open a file
-atom-open README.md
+open-in-atom README.md
 
 # Open a directory
-atom-open .
+open-in-atom .
 
 # Open a directory and some files under it
-atom-open . README.md package.json
+open-in-atom . README.md package.json
 ```
 
 ## Using with other apps
 
-You can set atom-open as your EDITOR for some apps. Here it is working with [ranger] (eg, `EDITOR=atom-open ranger`):
+You can set atom-open as your EDITOR for some apps. Here it is working with [ranger] (eg, `EDITOR=open-in-atom ranger`):
 
 ![open-in-atom-ranger](https://user-images.githubusercontent.com/74385/43037857-c60eabe6-8d44-11e8-9254-23c29826b045.gif)
 

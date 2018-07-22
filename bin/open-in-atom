@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# Open files in Atom via the HTTP RPC.
+# If it's not available, it falls back to atom's CLI.
+
+get_cache_dir () {
+  if [ -e "$XDG_CACHE_DIR" ]; then
+    echo "$XDG_CACHE_DIR"
+  elif [ -e "$LOCALAPPDATA" ]; then
+    echo "$LOCALAPPDATA"
+  elif [ -e "$HOME/Library/Caches" ]; then
+    echo "$HOME/Library/Caches"
+  elif [ -e "$HOME/AppData/Local" ]; then
+    echo "$HOME/AppData/Local"
+  else
+    echo "$HOME/.cache"
+  fi
+}
+
+PORTFILE="$(get_cache_dir)/open-in-atom/port"
+
+if [ -f "$PORTFILE" ]; then
+  API_HOST="http://127.0.0.1:$(cat $PORTFILE)"
+fi
+
+# Convert paths into a JSON array.
+jsonify_paths () {
+  # Build paths
+  paths=""
+  for fn in "$@"; do
+    # Handle absolute and relative paths properly
+    if [ "${fn:0:1}" == "/" ]; then
+      filepath="$fn"
+    else
+      filepath="$(pwd -LP)/${fn}"
+    fi
+
+    segment="\"${filepath}\""
+    if [ -n "$paths" ]; then
+      paths="${paths},${segment}"
+    else
+      paths="${segment}"
+    fi
+  done
+
+  echo "[${paths}]"
+}
+
+# Sends an action to the open-in-atom RPC server.
+call_rpc () {
+  action="$1"
+  data="$2"
+
+  # Send
+  curl \
+    --silent \
+    --header "Content-Type: application/json" \
+    --request POST \
+    --data "$data" \
+    "$API_HOST/do/$action" >/dev/null
+}
+
+# Opens files using the `openFile` RPC.
+do_open_file () {
+  if [ -z "$API_HOST" ]; then exit 1; fi
+  # Build JSON data
+  paths="$(jsonify_paths "$@")"
+  data="{\"paths\":${paths}}"
+  call_rpc openFile "$data"
+}
+
+# Opens a workspace using the `openWorkspace` RPC.
+do_open_workspace () {
+  if [ -z "$API_HOST" ]; then exit 1; fi
+  # Build JSON data
+  paths="$(jsonify_paths "$1")"
+  data="{\"paths\":${paths}}"
+  call_rpc openWorkspace "$data"
+}
+
+# Run
+if [ "$1" == '--' ]; then shift; fi
+if [ -z "$1" ]; then
+  # If no args were passed, just open Atom as usual
+  atom
+  exit $?
+elif [ -d "$1" ]; then
+  # If $1 is a directory, assume we're trying to open a workspace
+  if do_open_workspace "$1"; then
+    # If there are more files to open, open them regularly
+    shift
+    if [ -n "$1" ]; then do_open_file "$@"; fi
+  else
+    atom "$@"
+  fi
+  exit $?
+else
+  # Try to open the files in Atom
+  do_open_file "$@" || atom "$@"
+  exit $?
+fi
