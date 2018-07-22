@@ -2,25 +2,33 @@
 # Open files in Atom via the HTTP RPC.
 # If it's not available, it falls back to atom's CLI.
 
+# Finds the cache dir.
+# Much of this implementation is based off of:
+# https://github.com/LinusU/node-cachedir/blob/master/index.js
 get_cache_dir () {
   if [ -e "$XDG_CACHE_DIR" ]; then
-    echo "$XDG_CACHE_DIR"
+    echo "$XDG_CACHE_DIR" # Linux
   elif [ -e "$LOCALAPPDATA" ]; then
-    echo "$LOCALAPPDATA"
+    echo "$LOCALAPPDATA" # Windows
   elif [ -e "$HOME/Library/Caches" ]; then
-    echo "$HOME/Library/Caches"
+    echo "$HOME/Library/Caches" # macOS
   elif [ -e "$HOME/AppData/Local" ]; then
-    echo "$HOME/AppData/Local"
+    echo "$HOME/AppData/Local" # Windows
   else
-    echo "$HOME/.cache"
+    echo "$HOME/.cache" # Linux
   fi
 }
 
-PORTFILE="$(get_cache_dir)/open-in-atom/port"
+# Returns the http host for the open-in-atom RPC server.
+get_api_host () {
+  PORTFILE="$(get_cache_dir)/open-in-atom/port"
 
-if [ -f "$PORTFILE" ]; then
-  API_HOST="http://127.0.0.1:$(cat $PORTFILE)"
-fi
+  if [ -f "$PORTFILE" ]; then
+    echo "http://127.0.0.1:$(cat $PORTFILE)"
+  fi
+}
+
+API_HOST="$(get_api_host)"
 
 # Convert paths into a JSON array.
 jsonify_paths () {
