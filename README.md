@@ -1,46 +1,10 @@
 # open-in-atom-cli
 
-> Open a file in Atom from the terminal without lag
+> Open a file in Atom from the terminal without lag 🏎️
 
 ![open-in-atom](https://user-images.githubusercontent.com/74385/43037729-87aeccec-8d43-11e8-8509-b64115de0f91.gif)
 
-## Installation
-
-Install the bin using npm or yarn:
-
-```sh
-npm install -g open-in-atom-cli
-yarn global add open-in-atom-cli
-```
-
-Alternatively, you can just copy the shell script [`bin/open-in-atom`](bin/open-in-atom) to your PATH.
-
-You'll also need to install the companion Atom plugin, [open-in-atom].
-
-[open-in-atom]: https://github.com/rstacruz/open-in-atom
-
-## Usage
-
-Use `open-in-atom` instead of `atom`. It will open your files instantly, instead of waiting 5 seconds for the official Atom CLI.
-
-```sh
-# Open a file
-open-in-atom README.md
-
-# Open a directory
-open-in-atom .
-
-# Open a directory and some files under it
-open-in-atom . README.md package.json
-```
-
-## Using with other apps
-
-You can set atom-open as your EDITOR for some apps. Here it is working with [ranger] (eg, `EDITOR=open-in-atom ranger`):
-
-![open-in-atom-ranger](https://user-images.githubusercontent.com/74385/43037857-c60eabe6-8d44-11e8-9254-23c29826b045.gif)
-
-[ranger]: https://github.com/ranger/ranger
+For full documentation, see: **[rstacruz/open-in-atom](https://github.com/rstacruz/open-in-atom)**.
 
 ## Thanks
 
