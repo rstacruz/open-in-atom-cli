@@ -85,6 +85,15 @@ do_open_workspace () {
   call_rpc openWorkspace "$data"
 }
 
+# Runs the default atom CLI helper.
+do_atom () {
+  echo "(!) open-in-atom Warning: Running instance of Atom can't be reached." >&2
+  echo "    If Atom is running, invoke the open-in-atom:use-this-workspace' command." >&2
+  echo "" >&2
+  echo "    Opening your file in Atom CLI..." >&2
+  atom "$@"
+}
+
 # Run
 if [ "$1" == '--' ]; then shift; fi
 if [ -z "$1" ]; then
@@ -98,11 +107,11 @@ elif [ -d "$1" ]; then
     shift
     if [ -n "$1" ]; then do_open_file "$@"; fi
   else
-    atom "$@"
+    do_atom "$@"
   fi
   exit $?
 else
   # Try to open the files in Atom
-  do_open_file "$@" || atom "$@"
+  do_open_file "$@" || do_atom "$@"
   exit $?
 fi
