@@ -2,9 +2,11 @@
 
 > Open a file in Atom from the terminal without lag 🏎️
 
-![open-in-atom](https://user-images.githubusercontent.com/74385/43037729-87aeccec-8d43-11e8-8509-b64115de0f91.gif)
+This package requires the [open-in-atom] extension installed. For full documentation, see: **[rstacruz/open-in-atom][open-in-atom]**.
 
-For full documentation, see: **[rstacruz/open-in-atom](https://github.com/rstacruz/open-in-atom)**.
+[open-in-atom]: https://github.com/rstacruz/open-in-atom
+
+![open-in-atom](https://user-images.githubusercontent.com/74385/43037729-87aeccec-8d43-11e8-8509-b64115de0f91.gif)
 
 ## Thanks
 
