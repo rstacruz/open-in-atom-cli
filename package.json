@@ -1,18 +1,26 @@
 {
   "name": "open-in-atom-cli",
-  "version": "1.0.0",
   "description": "Open a file in Atom from the terminal without lag",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "atom"
-  ],
+  "version": "1.0.0",
+  "author": "Rico Sta. Cruz <rstacruz@users.noreply.github.com>",
   "bin": {
     "atom-open": "bin/atom-open",
     "open-in-atom": "bin/open-in-atom"
   },
-  "author": "",
-  "license": "ISC"
+  "bugs": {
+    "url": "https://github.com/rstacruz/open-in-atom-cli/issues"
+  },
+  "homepage": "https://github.com/rstacruz/open-in-atom-cli#readme",
+  "keywords": [
+    "atom"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstacruz/open-in-atom-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
